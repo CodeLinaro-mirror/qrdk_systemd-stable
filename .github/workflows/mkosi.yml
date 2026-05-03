@@ -191,7 +191,7 @@ jobs:
       run: sudo --preserve-env meson test -C build --no-rebuild --suite integration-tests --print-errorlogs --no-stdsplit --num-processes "$(($(nproc) - 1))"
 
     - name: Archive failed test journals
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       if: failure() && (github.repository == 'systemd/systemd' || github.repository == 'systemd/systemd-stable')
       with:
         name: ci-mkosi-${{ github.run_id }}-${{ github.run_attempt }}-${{ matrix.distro }}-${{ matrix.release }}-failed-test-journals
@@ -201,7 +201,7 @@ jobs:
         retention-days: 7
 
     - name: Archive packages
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       if: (success() || failure()) && (github.repository == 'systemd/systemd' || github.repository == 'systemd/systemd-stable')
       with:
         name: ci-mkosi-${{ github.run_id }}-${{ github.run_attempt }}-${{ matrix.distro }}-${{ matrix.release }}-packages
